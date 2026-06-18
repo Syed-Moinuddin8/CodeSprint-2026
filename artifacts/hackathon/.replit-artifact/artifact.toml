@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "CodeSprint 2026"
+version = "1.0.0"
+id = "artifacts/hackathon"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 19235
+
+[services.development]
+run = "pnpm --filter @workspace/hackathon run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/hackathon", "run", "build" ]
+publicDir = "artifacts/hackathon/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "19235"
+BASE_PATH = "/"

@@ -1,0 +1,274 @@
+Build a modern, professional, fully responsive Online Hackathon Website using React, TypeScript, Tailwind CSS, and shadcn/ui.
+
+The website should have a premium startup-like appearance with bright colors, smooth animations, glassmorphism effects, gradients, and modern UI components.
+
+Design Requirements
+
+DO NOT use dark themes.
+
+Use a bright and energetic color palette:
+
+Primary: #2563EB (Blue)
+Secondary: #06B6D4 (Cyan)
+Accent: #F97316 (Orange)
+Success: #22C55E (Green)
+Background: White (#FFFFFF)
+Section Backgrounds: Very Light Blue (#EFF6FF), Light Cyan (#ECFEFF), Light Orange (#FFF7ED)
+
+Design Style:
+
+Modern Hackathon Landing Page
+Rounded corners
+Soft shadows
+Glassmorphism cards
+Smooth hover effects
+Framer Motion animations
+Gradient backgrounds
+Mobile-first responsive design
+Website Name
+
+Create placeholder:
+
+"CodeSprint 2026"
+
+Tagline:
+
+"Build. Innovate. Compete."
+
+Subheading:
+
+"Join the ultimate 14-hour online hackathon and transform your ideas into reality."
+
+Sections Required
+1. Hero Section
+
+Include:
+
+Large title
+Countdown Timer
+Event Date
+Duration Badge (14 Hours)
+Register Now button
+Download Rulebook button
+Floating animated shapes
+
+Statistics cards:
+
+Participants
+Teams
+Prize Pool
+Judges
+2. About Section
+
+Include:
+
+What is the hackathon
+Why participate
+Who can participate
+
+Use modern icon cards.
+
+3. Timeline Section
+
+Beautiful vertical timeline with:
+
+Registration Opens
+
+Registration Closes
+
+Opening Ceremony
+
+Hackathon Begins
+
+Midpoint Checkpoint
+
+Submission Deadline
+
+Final Presentations
+
+Winner Announcement
+
+Add animated timeline indicators.
+
+4. Rules Section
+
+Create modern cards.
+
+Eligibility
+Open to students and professionals
+Team size 1–4
+Allowed
+AI tools
+Open-source libraries
+APIs
+Not Allowed
+Plagiarism
+Pre-built projects
+Copying solutions
+Submission Requirements
+GitHub Repository
+Demo Video
+Project Description
+5. Judging Criteria
+
+Create animated progress bars.
+
+Innovation & Creativity – 30%
+
+Problem Solving & Impact – 30%
+
+Technical Implementation – 25%
+
+Presentation & Demo – 15%
+
+Display total score out of 100.
+
+6. Prize Section
+
+Create attractive prize cards.
+
+Winner
+
+Runner-Up
+
+Second Runner-Up
+
+Best Innovation
+
+Best Beginner Team
+
+Add trophy icons.
+
+7. FAQ Section
+
+Accordion style.
+
+Questions:
+
+Can I participate solo?
+
+Can I use AI tools?
+
+Can I use existing code?
+
+Is the hackathon online?
+
+How are winners selected?
+
+What should I submit?
+
+8. Registration Section
+
+Build a real registration form.
+
+Fields:
+
+Full Name
+Email
+Phone Number
+College / Organization
+Team Name
+Team Size
+Team Members
+
+Add validation.
+
+Show success message after submission.
+
+Store data in backend database.
+
+9. Contact Section
+
+Include:
+
+Email
+Discord
+LinkedIn
+
+Add social icons.
+
+10. Footer
+
+Include:
+
+Quick Links
+Contact Information
+Copyright
+Terms and Conditions
+Admin Panel
+
+Create secure admin dashboard.
+
+Admin Login.
+
+Dashboard should show:
+
+Total Registrations
+Teams Registered
+Individual Participants
+Recent Registrations
+
+Features:
+
+View Registrations
+Search Registrations
+Export CSV
+Delete Registrations
+Manage Announcements
+Announcement System
+
+Create announcements section.
+
+Admin can:
+
+Add Announcement
+Edit Announcement
+Delete Announcement
+
+Participants can see updates on homepage.
+
+Backend Requirements
+
+Use:
+
+Python Flask Backend
+SQLite Database
+
+Database Tables:
+
+Users
+
+Teams
+
+Registrations
+
+Announcements
+
+Admins
+
+Additional Features
+
+Add:
+
+Loading animations
+Scroll animations
+Smooth page transitions
+Toast notifications
+Responsive navigation
+Sticky navbar
+Back-to-top button
+SEO optimization
+Fast performance
+Deployment Requirements
+
+Project must run perfectly on Replit.
+
+Provide:
+
+Frontend
+Backend
+Database
+Admin Login
+Complete folder structure
+Installation instructions
+Environment variable setup
