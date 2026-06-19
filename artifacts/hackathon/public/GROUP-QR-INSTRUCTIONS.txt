@@ -1,0 +1,18 @@
+WHATSAPP GROUP QR CODE INSTRUCTIONS
+====================================
+
+Please add your WhatsApp group QR code image to this folder with the filename:
+  Group.jpeg
+
+Steps to get your WhatsApp group QR code:
+1. Open WhatsApp and go to your group
+2. Tap on the group name at the top
+3. Tap "Invite via link"
+4. Tap "QR code"
+5. Save the QR code image
+6. Rename it to "Group.jpeg"
+7. Place it in this folder: Hackathon-Master-Plan/artifacts/hackathon/public/
+
+The image will automatically appear on the registration success page.
+
+Supported formats: Group.jpeg, Group.jpg, or Group.png

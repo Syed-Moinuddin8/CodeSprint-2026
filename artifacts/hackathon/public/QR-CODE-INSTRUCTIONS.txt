@@ -1,0 +1,31 @@
+QR CODE IMAGE SETUP INSTRUCTIONS
+=================================
+
+To add the payment QR code to your registration form:
+
+1. Save your QR code image as: qr-code-payment.png
+
+2. Place it in this directory: 
+   Hackathon-Master-Plan/artifacts/hackathon/public/
+
+3. The image will automatically appear in the registration form
+
+RECOMMENDED IMAGE SPECIFICATIONS:
+- Format: PNG (transparent background preferred)
+- Size: 500x500 pixels or larger (square)
+- File size: Under 500KB
+
+NOTE: The image you provided has a Google Pay logo in the center, 
+which is perfect for UPI payments!
+
+CURRENT STATUS:
+- The registration form is already configured to display the QR code
+- It will show a placeholder icon until you add the image file
+- File path expected: /qr-code-payment.png
+- Alternative formats supported: .jpg, .jpeg, .svg
+
+TO ADD THE QR CODE:
+Simply save the QR code image you want to use as:
+Hackathon-Master-Plan/artifacts/hackathon/public/qr-code-payment.png
+
+The form will automatically pick it up after page refresh!

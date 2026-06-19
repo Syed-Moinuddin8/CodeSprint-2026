@@ -3,11 +3,50 @@ import { db } from "@workspace/db";
 import { registrationsTable } from "@workspace/db";
 import { eq, ilike, or, desc } from "drizzle-orm";
 import { CreateRegistrationBody, DeleteRegistrationParams } from "@workspace/api-zod";
+import multer from "multer";
+import path from "path";
+import { fileURLToPath } from "url";
 
 const router = Router();
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Uploads directory - get from environment or use project root path
+const projectRoot = process.env.PROJECT_ROOT || path.resolve(process.cwd(), "../..");
+const uploadsDir = path.join(projectRoot, "uploads");
+
+// Configure multer for file uploads
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, uploadsDir);
+  },
+  filename: (req, file, cb) => {
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    cb(null, "receipt-" + uniqueSuffix + path.extname(file.originalname));
+  },
+});
+
+const upload = multer({
+  storage,
+  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB limit
+  fileFilter: (req, file, cb) => {
+    const allowedTypes = /jpeg|jpg|png|gif|pdf/;
+    const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
+    const mimetype = allowedTypes.test(file.mimetype);
+    if (extname && mimetype) {
+      cb(null, true);
+    } else {
+      cb(new Error("Only image and PDF files are allowed"));
+    }
+  },
+});
+
 function serializeReg(r: typeof registrationsTable.$inferSelect) {
-  return { ...r, createdAt: r.createdAt.toISOString() };
+  return { 
+    ...r, 
+    createdAt: typeof r.createdAt === 'string' ? r.createdAt : r.createdAt.toISOString() 
+  };
 }
 
 router.get("/registrations", async (req, res): Promise<void> => {
@@ -44,8 +83,14 @@ router.get("/registrations", async (req, res): Promise<void> => {
   }
 });
 
-router.post("/registrations", async (req, res): Promise<void> => {
-  const parsed = CreateRegistrationBody.safeParse(req.body);
+router.post("/registrations", upload.single("paymentReceipt"), async (req, res): Promise<void> => {
+  const body = {
+    ...req.body,
+    teamSize: Number(req.body.teamSize),
+    paymentReceiptPath: req.file ? `/uploads/${req.file.filename}` : undefined,
+  };
+  
+  const parsed = CreateRegistrationBody.safeParse(body);
   if (!parsed.success) {
     res.status(400).json({ error: "Invalid input", details: parsed.error.issues });
     return;
@@ -57,8 +102,8 @@ router.post("/registrations", async (req, res): Promise<void> => {
       .returning();
     res.status(201).json(serializeReg(reg!));
   } catch (err: any) {
-    if (err?.code === "23505") {
-      res.status(409).json({ error: "Email already registered" });
+    if (err?.code === "23505" || err?.code === "SQLITE_CONSTRAINT" || err?.code === "SQLITE_CONSTRAINT_UNIQUE") {
+      res.status(409).json({ error: "Email already registered. Please use a different email address." });
       return;
     }
     req.log.error({ err }, "Failed to create registration");
@@ -90,7 +135,7 @@ router.get("/registrations/export", async (req, res): Promise<void> => {
           `"${r.teamName.replace(/"/g, '""')}"`,
           r.teamSize,
           `"${(r.teamMembers ?? "").replace(/"/g, '""')}"`,
-          r.createdAt.toISOString(),
+          typeof r.createdAt === 'string' ? r.createdAt : r.createdAt.toISOString(),
         ].join(","),
       ),
     ];

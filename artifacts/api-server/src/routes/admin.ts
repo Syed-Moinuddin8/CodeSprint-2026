@@ -88,7 +88,7 @@ router.get("/admin/stats", async (req, res): Promise<void> => {
       individualParticipants,
       recentRegistrations: recentRegistrations.map((r) => ({
         ...r,
-        createdAt: r.createdAt.toISOString(),
+        createdAt: typeof r.createdAt === 'string' ? r.createdAt : r.createdAt.toISOString(),
       })),
     });
   } catch (err) {

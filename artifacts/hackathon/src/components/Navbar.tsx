@@ -1,7 +1,11 @@
 import React from "react";
 import { Link, useLocation } from "wouter";
 
-export default function Navbar() {
+interface NavbarProps {
+  onRegisterClick?: () => void;
+}
+
+export default function Navbar({ onRegisterClick }: NavbarProps) {
   const [location] = useLocation();
 
   return (
@@ -15,17 +19,22 @@ export default function Navbar() {
           </div>
           
           <div className="hidden md:flex items-center space-x-8">
-            <a href="#about" className="text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors" data-testid="link-about">About</a>
-            <a href="#timeline" className="text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors" data-testid="link-timeline">Timeline</a>
-            <a href="#rules" className="text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors" data-testid="link-rules">Rules</a>
-            <a href="#prizes" className="text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors" data-testid="link-prizes">Prizes</a>
-            <a href="#faq" className="text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors" data-testid="link-faq">FAQ</a>
+            <Link href="/about" className="text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors" data-testid="link-about">About</Link>
+            <Link href="/timeline" className="text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors" data-testid="link-timeline">Timeline</Link>
+            <Link href="/rules" className="text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors" data-testid="link-rules">Rules</Link>
+            <Link href="/prizes" className="text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors" data-testid="link-prizes">Prizes</Link>
+            <Link href="/faq" className="text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors" data-testid="link-faq">FAQ</Link>
+            <Link href="/contact" className="text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors" data-testid="link-contact">Contact</Link>
             {location.startsWith("/admin") && (
               <Link href="/admin/dashboard" className="text-sm font-bold text-orange-500 hover:text-orange-600 transition-colors" data-testid="link-admin">Admin</Link>
             )}
-            <a href="#register" className="bg-blue-600 text-white px-5 py-2.5 rounded-full font-semibold text-sm hover:bg-blue-700 transition-colors shadow-md hover:shadow-lg" data-testid="link-register">
+            <button 
+              onClick={onRegisterClick}
+              className="bg-blue-600 text-white px-5 py-2.5 rounded-full font-semibold text-sm hover:bg-blue-700 transition-colors shadow-md hover:shadow-lg" 
+              data-testid="button-register"
+            >
               Register Now
-            </a>
+            </button>
           </div>
         </div>
       </div>

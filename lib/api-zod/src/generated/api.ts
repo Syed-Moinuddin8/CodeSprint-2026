@@ -104,6 +104,7 @@ export const ListRegistrationsResponseItem = zod.object({
   "teamName": zod.string(),
   "teamSize": zod.number(),
   "teamMembers": zod.string().nullish(),
+  "paymentReceiptPath": zod.string().nullish(),
   "createdAt": zod.string()
 })
 export const ListRegistrationsResponse = zod.array(ListRegistrationsResponseItem)
@@ -128,7 +129,8 @@ export const CreateRegistrationBody = zod.object({
   "college": zod.string().min(1),
   "teamName": zod.string().min(1),
   "teamSize": zod.number().min(1).max(createRegistrationBodyTeamSizeMax),
-  "teamMembers": zod.string().optional()
+  "teamMembers": zod.string().optional(),
+  "paymentReceiptPath": zod.string().optional()
 })
 
 
@@ -179,6 +181,7 @@ export const GetAdminStatsResponse = zod.object({
   "teamName": zod.string(),
   "teamSize": zod.number(),
   "teamMembers": zod.string().nullish(),
+  "paymentReceiptPath": zod.string().nullish(),
   "createdAt": zod.string()
 }))
 })

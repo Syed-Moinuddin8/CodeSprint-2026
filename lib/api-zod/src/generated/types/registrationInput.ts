@@ -22,4 +22,5 @@ export interface RegistrationInput {
      */
   teamSize: number;
   teamMembers?: string;
+  paymentReceiptPath?: string;
 }

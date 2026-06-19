@@ -16,5 +16,7 @@ export interface Registration {
   teamSize: number;
   /** @nullable */
   teamMembers?: string | null;
+  /** @nullable */
+  paymentReceiptPath?: string | null;
   createdAt: string;
 }

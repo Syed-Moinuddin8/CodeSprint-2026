@@ -69,6 +69,8 @@ export interface Registration {
   teamSize: number;
   /** @nullable */
   teamMembers?: string | null;
+  /** @nullable */
+  paymentReceiptPath?: string | null;
   createdAt: string;
 }
 
@@ -88,6 +90,7 @@ export interface RegistrationInput {
      */
   teamSize: number;
   teamMembers?: string;
+  paymentReceiptPath?: string;
 }
 
 export interface AdminCredentials {

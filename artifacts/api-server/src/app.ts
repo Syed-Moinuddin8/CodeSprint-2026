@@ -5,6 +5,11 @@ import cookieParser from "cookie-parser";
 import session from "express-session";
 import router from "./routes";
 import { logger } from "./lib/logger";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app: Express = express();
 
@@ -51,6 +56,11 @@ app.use(
     },
   }),
 );
+
+// Serve uploaded files from project root uploads directory
+const projectRoot = process.env.PROJECT_ROOT || path.resolve(process.cwd(), "../..");
+const uploadsPath = path.join(projectRoot, "uploads");
+app.use("/uploads", express.static(uploadsPath));
 
 app.use("/api", router);
 
