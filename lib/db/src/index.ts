@@ -1,26 +1,15 @@
-import { drizzle } from "drizzle-orm/better-sqlite3";
-import Database from "better-sqlite3";
+import { drizzle } from "drizzle-orm/postgres-js";
+import postgres from "postgres";
 import * as schema from "./schema";
-import { fileURLToPath } from "url";
-import { dirname, join } from "path";
 
-// Get the directory path for ESM
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+// PostgreSQL connection
+const connectionString = process.env.DATABASE_URL || "";
 
-// SQLite database file location
-const dbPath = process.env.DATABASE_PATH || join(__dirname, "../../../data/hackathon.db");
-
-// Ensure the data directory exists
-import { mkdirSync } from "fs";
-const dataDir = dirname(dbPath);
-try {
-  mkdirSync(dataDir, { recursive: true });
-} catch (err) {
-  // Directory already exists
+if (!connectionString) {
+  throw new Error("DATABASE_URL environment variable is required");
 }
 
-const sqlite = new Database(dbPath);
-export const db = drizzle(sqlite, { schema });
+const client = postgres(connectionString);
+export const db = drizzle(client, { schema });
 
 export * from "./schema";

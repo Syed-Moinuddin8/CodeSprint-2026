@@ -1,14 +1,13 @@
-import { sqliteTable, text, integer } from "drizzle-orm/sqlite-core";
+import { pgTable, text, serial, timestamp } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod/v4";
-import { sql } from "drizzle-orm";
 
-export const announcementsTable = sqliteTable("announcements", {
-  id: integer("id").primaryKey({ autoIncrement: true }),
+export const announcementsTable = pgTable("announcements", {
+  id: serial("id").primaryKey(),
   title: text("title").notNull(),
   content: text("content").notNull(),
   priority: text("priority").default("info"),
-  createdAt: text("created_at").notNull().default(sql`(datetime('now'))`),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
 export const insertAnnouncementSchema = createInsertSchema(announcementsTable).omit({ id: true, createdAt: true });

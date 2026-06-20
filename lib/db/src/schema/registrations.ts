@@ -1,10 +1,9 @@
-import { sqliteTable, text, integer } from "drizzle-orm/sqlite-core";
+import { pgTable, text, integer, serial, timestamp } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod/v4";
-import { sql } from "drizzle-orm";
 
-export const registrationsTable = sqliteTable("registrations", {
-  id: integer("id").primaryKey({ autoIncrement: true }),
+export const registrationsTable = pgTable("registrations", {
+  id: serial("id").primaryKey(),
   fullName: text("full_name").notNull(),
   email: text("email").notNull().unique(),
   phone: text("phone").notNull(),
@@ -13,7 +12,7 @@ export const registrationsTable = sqliteTable("registrations", {
   teamSize: integer("team_size").notNull(),
   teamMembers: text("team_members"),
   paymentReceiptPath: text("payment_receipt_path"),
-  createdAt: text("created_at").notNull().default(sql`(datetime('now'))`),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
 export const insertRegistrationSchema = createInsertSchema(registrationsTable).omit({ id: true, createdAt: true });

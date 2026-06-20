@@ -1,11 +1,10 @@
-import { sqliteTable, text, integer } from "drizzle-orm/sqlite-core";
-import { sql } from "drizzle-orm";
+import { pgTable, text, serial, timestamp } from "drizzle-orm/pg-core";
 
-export const adminsTable = sqliteTable("admins", {
-  id: integer("id").primaryKey({ autoIncrement: true }),
+export const adminsTable = pgTable("admins", {
+  id: serial("id").primaryKey(),
   username: text("username").notNull().unique(),
   passwordHash: text("password_hash").notNull(),
-  createdAt: text("created_at").notNull().default(sql`(datetime('now'))`),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
 export type Admin = typeof adminsTable.$inferSelect;
