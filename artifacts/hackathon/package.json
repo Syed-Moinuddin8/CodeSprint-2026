@@ -75,6 +75,11 @@
     "zod": "catalog:"
   },
   "dependencies": {
-    "jspdf": "^4.2.1"
+    "@vercel/node": "^5.8.17",
+    "bcryptjs": "^3.0.3",
+    "cloudinary": "^2.10.0",
+    "drizzle-orm": "catalog:",
+    "jspdf": "^4.2.1",
+    "postgres": "^3.4.9"
   }
 }
